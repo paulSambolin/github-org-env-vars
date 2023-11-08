@@ -1,0 +1,32 @@
+name: Set Github Action Organization Environemnt Variables
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  set_vars:
+    strategy:
+      matrix:
+        environment: 
+          - dev
+          - prod
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: ./main.sh ${{ matrix.environment }}
+        env:
+          # GITHUB_TOKEN has admin access to github
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          # Variables must be available to workflow
+          AWS_ACCOUNT_ID_DEVELOPMENT: ${{ vars.AWS_ACCOUNT_ID_DEVELOPMENT }}
+          AWS_ACCOUNT_ID_PRODUCTION: ${{ vars.AWS_ACCOUNT_ID_PRODUCTION }}
+          # TODO: copy all vars to env vars in prior workflow step
+          # TODO: copy all secrets to env vars in prior workflow step
