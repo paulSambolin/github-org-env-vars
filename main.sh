@@ -30,7 +30,7 @@ for variable in $VARIABLES; do
     # TODO: create env if it does not exist
 
     # Set Value of Repo Action Environment Variable
-    # gh variable set -e $ENV -R $repo $REPO_ENV_VAR_NAME --body "$VALUE" || true
-    echo "dryrun: gh variable set -e $ENV -R $repo $REPO_ENV_VAR_NAME --body \"$VALUE\" || true"
+    gh variable set -e $ENV -R $repo $REPO_ENV_VAR_NAME --body "$VALUE" || true
+    # echo "dryrun: gh variable set -e $ENV -R $repo $REPO_ENV_VAR_NAME --body \"$VALUE\" || true"
   done
 done
