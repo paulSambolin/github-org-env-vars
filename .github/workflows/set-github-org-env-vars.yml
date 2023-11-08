@@ -23,7 +23,7 @@ jobs:
 
       - run: ./main.sh ${{ matrix.environment }}
         env:
-          # GITHUB_TOKEN has admin access to github
+          # GITHUB_TOKEN has admin access to all github repos
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           # Variables must be available to workflow
           AWS_ACCOUNT_ID_DEVELOPMENT: ${{ vars.AWS_ACCOUNT_ID_DEVELOPMENT }}
